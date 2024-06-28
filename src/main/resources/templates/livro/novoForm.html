@@ -22,25 +22,25 @@
                     <p th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></p>
                 </div>
                 <div class="mb-3">
-                    <label for="anoPublicacao" class="form-label">Ano de Publicação:</label>
-                    <input type="number" id="anoPublicacao" th:field="*{anoPublicacao}" class="form-control" required/>
-                    <p th:if="${#fields.hasErrors('anoPublicacao')}" th:errors="*{anoPublicacao}"></p>
-                </div>
-                <div class="mb-3">
                     <label for="editora" class="form-label">Editora:</label>
                     <input type="text" id="editora" th:field="*{editora}" class="form-control" required/>
                     <p th:if="${#fields.hasErrors('editora')}" th:errors="*{editora}"></p>
                 </div>
-                <div class="mb-3">
-                    <label for="categoria" class="form-label">Categoria ID:</label>
-                    <input type="number" id="categoria" th:field="*{categoriaId}" class="form-control" required/>
-                    <p th:if="${#fields.hasErrors('categoriaId')}" th:errors="*{categoriaId}"></p>
-                </div>
-                <div class="mb-3">
-                    <label for="autor" class="form-label">Autor ID:</label>
-                    <input type="number" id="autor" th:field="*{autorId}" class="form-control" required/>
-                    <p th:if="${#fields.hasErrors('autorId')}" th:errors="*{autorId}"></p>
-                </div>
+<!--                <div class="mb-3">-->
+<!--                    <label for="categoria" class="form-label">Categoria ID:</label>-->
+<!--                    <input type="number" id="categoria" th:field="*{categoria_id}" class="form-control" required/>-->
+<!--                    <p th:if="${#fields.hasErrors('categoria_id')}" th:errors="*{categoria_id}"></p>-->
+<!--                </div>-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="autor" class="form-label">Autor ID:</label>-->
+<!--                    <input type="number" id="autor" th:field="*{autor_id}" class="form-control" required/>-->
+<!--                    <p th:if="${#fields.hasErrors('autor_id')}" th:errors="*{autor_id}"></p>-->
+<!--                </div>-->
+                <select th:field="*{categoria_id}">
+                    <option th:each="categoria: ${categorias}"
+                            th:value="${categoria.id}"
+                            th:text="${categoria.nome}">
+                </select>
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
         </div>

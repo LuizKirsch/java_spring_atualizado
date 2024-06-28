@@ -18,6 +18,11 @@ public record LivroDTO (
         Integer categoria_id,
 
         @NotNull
-        Integer autor_id
+        Integer autor_id,
+
+        CategoriaDTO categoria,
+
+        AutorDTO autor
         ) {
+
 }

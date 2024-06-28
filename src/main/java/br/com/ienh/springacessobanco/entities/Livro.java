@@ -23,9 +23,6 @@ public class Livro {
     @JoinColumn(name = "autor_id", referencedColumnName = "id")
     private Autor autor;
 
-    // Getters e Setters, construtores, equals, hashCode, toString aqui
-
-    // Exemplo de construtor vazio e completo
     public Livro() {}
 
     public Livro(String titulo, String editora, Categoria categoria, Autor autor) {
@@ -35,7 +32,6 @@ public class Livro {
         this.autor = autor;
     }
 
-    // Getters e Setters
     public int getId() {
         return id;
     }
