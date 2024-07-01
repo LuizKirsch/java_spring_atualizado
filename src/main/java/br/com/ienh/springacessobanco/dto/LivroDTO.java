@@ -14,10 +14,8 @@ public record LivroDTO (
         @Size(max = 40, min = 5, message = "O editora deve ter entre 5 e 40 caracteres.")
         String editora,
 
-        @NotNull
         Integer categoria_id,
 
-        @NotNull
         Integer autor_id,
 
         CategoriaDTO categoria,

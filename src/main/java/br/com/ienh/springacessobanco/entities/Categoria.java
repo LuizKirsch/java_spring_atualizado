@@ -2,6 +2,8 @@ package br.com.ienh.springacessobanco.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "categorias")
 public class Categoria {
@@ -11,6 +13,10 @@ public class Categoria {
 
     @Column(name = "nome")
     private String nome;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "categoria")
+    private List<Livro> categoria;
 
     public Categoria() {
 

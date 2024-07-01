@@ -42,12 +42,8 @@ public class LivroService {
         return livros;
     }
 
-    public void salvarLivro(LivroDTO livro){
-        Livro novoLivro = new Livro();
-        novoLivro.setTitulo(livro.titulo());
-        novoLivro.setEditora(livro.editora());
-        categoriaRepository.findById(livro.categoria_id()).ifPresent(novoLivro::setCategoria);
-        autorRepository.findById(livro.autor_id()).ifPresent(novoLivro::setAutor);
+    public void salvar(Livro livro) {
+        livroRepository.save(livro);
     }
 
 }

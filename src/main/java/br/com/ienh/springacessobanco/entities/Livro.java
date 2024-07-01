@@ -15,12 +15,12 @@ public class Livro {
     @Column(name = "editora")
     private String editora;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @ManyToOne
-    @JoinColumn(name = "autor_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "autor_id")
     private Autor autor;
 
     public Livro() {}
