@@ -22,6 +22,10 @@ public class Doacao {
         this.livro = livro;
     }
 
+    public Doacao() {
+
+    }
+
     public int getId() {
         return id;
     }
