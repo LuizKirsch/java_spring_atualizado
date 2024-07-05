@@ -1,7 +1,6 @@
 package br.com.ienh.springacessobanco.controllers;
 
 import br.com.ienh.springacessobanco.dto.CategoriaDTO;
-import br.com.ienh.springacessobanco.dto.ProfessorDTO;
 import br.com.ienh.springacessobanco.services.CategoriaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
