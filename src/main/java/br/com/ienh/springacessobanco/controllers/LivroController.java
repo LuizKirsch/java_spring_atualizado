@@ -82,16 +82,10 @@ public class LivroController {
     }
 
     private void carregarCategoriasEAutores(Model model) {
-        Iterable<Categoria> categorias = livroService.obterTodasCategorias();
-        List<CategoriaDTO> categoriaDTO = new ArrayList<>();
-        categorias.forEach(categoria -> categoriaDTO.add(
-                new CategoriaDTO(categoria.getId(), categoria.getNome())));
-        model.addAttribute("categorias", categoriaDTO);
+        List<CategoriaDTO> categorias = livroService.obterTodasCategorias();
+        model.addAttribute("categorias", categorias);
 
-        Iterable<Autor> autores = livroService.obterTodosAutores();
-        List<AutorDTO> autorDTO = new ArrayList<>();
-        autores.forEach(autor -> autorDTO.add(
-                new AutorDTO(autor.getId(), autor.getNome())));
-        model.addAttribute("autores", autorDTO);
+        List<AutorDTO> autores = livroService.obterTodosAutores();
+        model.addAttribute("autores", autores);
     }
 }

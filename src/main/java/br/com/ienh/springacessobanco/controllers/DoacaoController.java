@@ -6,6 +6,7 @@ import br.com.ienh.springacessobanco.dto.DoacaoDTO;
 import br.com.ienh.springacessobanco.dto.LivroDTO;
 import br.com.ienh.springacessobanco.entities.Autor;
 import br.com.ienh.springacessobanco.entities.Categoria;
+import br.com.ienh.springacessobanco.entities.Doacao;
 import br.com.ienh.springacessobanco.entities.Livro;
 import br.com.ienh.springacessobanco.services.DoacaoService;
 import br.com.ienh.springacessobanco.services.LivroService;
@@ -46,6 +47,42 @@ public class DoacaoController {
         }
 
         doacaoService.salvar(doacao);
+        return "redirect:/doacao/listar";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editarForm(@PathVariable("id") int id, Model model) {
+        Doacao doacao = doacaoService.obterPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("ID da doacao inválido: " + id));
+
+        DoacaoDTO doacaoDTO = new DoacaoDTO(
+                doacao.getDoador(),
+                doacao.getId(),
+                new LivroDTO(
+                        doacao.getLivro().getId(),
+                        doacao.getLivro().getTitulo(),
+                        doacao.getLivro().getEditora(),
+                        doacao.getLivro().getCategoria().getId(),
+                        doacao.getLivro().getAutor().getId(),
+                        new CategoriaDTO(doacao.getLivro().getCategoria().getId(), doacao.getLivro().getCategoria().getNome()),
+                        new AutorDTO(doacao.getLivro().getAutor().getId(), doacao.getLivro().getAutor().getNome())
+                )
+        );
+
+        model.addAttribute("doacao", doacaoDTO);
+        carregarLivros(model);
+
+        return "/doacao/editarForm";
+    }
+
+    @PostMapping("/editar/{id}")
+    public String editarSalvar(@PathVariable("id") int id, @Valid @ModelAttribute("doacao") DoacaoDTO doacaoDTO, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) {
+            carregarLivros(model);
+            return "/doacao/editarForm";
+        }
+
+        doacaoService.atualizar(id, doacaoDTO);
         return "redirect:/doacao/listar";
     }
 

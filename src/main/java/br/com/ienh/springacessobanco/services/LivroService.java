@@ -1,5 +1,7 @@
 package br.com.ienh.springacessobanco.services;
 
+import br.com.ienh.springacessobanco.dto.AutorDTO;
+import br.com.ienh.springacessobanco.dto.CategoriaDTO;
 import br.com.ienh.springacessobanco.dto.LivroDTO;
 import br.com.ienh.springacessobanco.entities.Autor;
 import br.com.ienh.springacessobanco.entities.Categoria;
@@ -10,6 +12,8 @@ import br.com.ienh.springacessobanco.repositories.LivroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,12 +54,18 @@ public class LivroService {
         livroRepository.deleteById(id);
     }
 
-    public Iterable<Categoria> obterTodasCategorias() {
-        return categoriaRepository.findAll();
+    public List<CategoriaDTO> obterTodasCategorias() {
+        List<CategoriaDTO> categoriaDTOs = new ArrayList<>();
+        categoriaRepository.findAll().forEach(categoria ->
+                categoriaDTOs.add(new CategoriaDTO(categoria.getId(), categoria.getNome())));
+        return categoriaDTOs;
     }
 
-    public Iterable<Autor> obterTodosAutores() {
-        return autorRepository.findAll();
+    public List<AutorDTO> obterTodosAutores() {
+        List<AutorDTO> autorDTOs = new ArrayList<>();
+        autorRepository.findAll().forEach(autor ->
+                autorDTOs.add(new AutorDTO(autor.getId(), autor.getNome())));
+        return autorDTOs;
     }
 
     private void atualizarLivroComDTO(Livro livro, LivroDTO livroDTO) {

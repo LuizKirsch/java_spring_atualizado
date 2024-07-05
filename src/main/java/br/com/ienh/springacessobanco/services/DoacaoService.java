@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DoacaoService {
@@ -25,13 +26,14 @@ public class DoacaoService {
     public Iterable<Doacao> obterTodos() {
         return doacaoRepository.findAll();
     }
-
+    public Optional<Doacao> obterPorId(int id) {
+        return doacaoRepository.findById(id);
+    }
     public Doacao salvar(DoacaoDTO doacaoDTO) {
         Doacao novaDoacao = new Doacao();
         atualizarDoacaoComDTO(novaDoacao, doacaoDTO);
         return doacaoRepository.save(novaDoacao);
     }
-
 
     public void deletar(int id) {
         doacaoRepository.deleteById(id);
@@ -49,5 +51,13 @@ public class DoacaoService {
         Livro livro = livroRepository.findById(doacaoDTO.livro_id())
                 .orElseThrow(() -> new IllegalArgumentException("Livro inválido: " + doacaoDTO.livro_id()));
         doacao.setLivro(livro);
+    }
+
+    public Doacao atualizar(int id, DoacaoDTO doacaoDTO) {
+        Doacao doacaoExistente = doacaoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("ID de livro inválido: " + id));
+
+        atualizarDoacaoComDTO(doacaoExistente, doacaoDTO);
+        return doacaoRepository.save(doacaoExistente);
     }
 }
